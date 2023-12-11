@@ -20,8 +20,14 @@ export default function useTheme() {
 		defaultTheme
 	);
 
+	createRenderEffect(() => {
+		document.body.setAttribute("data-color-theme", theme());
+	});
+
 	const toggleTheme = () => {
-		setTheme((prev) => (prev === "light" ? "dark" : "light"));
+		const newTheme = theme() === "light" ? "dark" : "light";
+		setTheme(() => newTheme);
+		document.body.setAttribute("data-color-theme", theme());
 	};
 
 	return [theme, toggleTheme] as const;
