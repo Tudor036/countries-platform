@@ -3,14 +3,18 @@ import type { Config } from "tailwindcss";
 
 const config: Config = {
 	darkMode: ["class", '[data-color-theme="dark"]'],
-	content: ["./src/**/*.tsx"],
+	content: ["./index.html", "./src/**/*.tsx"],
 	theme: {
 		extend: {
 			backgroundColor: {
 				primaryLight: "#ffffff",
 				secondaryLight: "#fafafa",
-				primaryDark: "#202C36",
-				secondaryDark: "#2B3844",
+				primaryDark: "#2B3844",
+				secondaryDark: "#202C36",
+			},
+			colors: {
+				primaryLight: "#111517",
+				secondatyLight: "#848484",
 			},
 			fontFamily: {
 				sans: [

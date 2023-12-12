@@ -1,49 +1,21 @@
-import type { Component } from 'solid-js';
-import { Link, useRoutes, useLocation } from '@solidjs/router';
+import type { Component } from "solid-js";
+import { useRoutes } from "@solidjs/router";
 
-import { routes } from './routes';
+import { routes } from "./routes";
+import Header from "./components/header";
+import ThemeProvider from "./components/themeProvider";
 
 const App: Component = () => {
-  const location = useLocation();
-  const Route = useRoutes(routes);
+	const Route = useRoutes(routes);
 
-  return (
-    <>
-      <nav class="bg-gray-200 text-gray-900 px-4">
-        <ul class="flex items-center">
-          <li class="py-2 px-4">
-            <Link href="/" class="no-underline hover:underline">
-              Home
-            </Link>
-          </li>
-          <li class="py-2 px-4">
-            <Link href="/about" class="no-underline hover:underline">
-              About
-            </Link>
-          </li>
-          <li class="py-2 px-4">
-            <Link href="/error" class="no-underline hover:underline">
-              Error
-            </Link>
-          </li>
-
-          <li class="text-sm flex items-center space-x-1 ml-auto">
-            <span>URL:</span>
-            <input
-              class="w-75px p-1 bg-white text-sm rounded-lg"
-              type="text"
-              readOnly
-              value={location.pathname}
-            />
-          </li>
-        </ul>
-      </nav>
-
-      <main>
-        <Route />
-      </main>
-    </>
-  );
+	return (
+		<ThemeProvider>
+			<Header />
+			<main class="max-w-[1280px] m-auto p-4 md:p-12 bg-transparent">
+				<Route />
+			</main>
+		</ThemeProvider>
+	);
 };
 
 export default App;

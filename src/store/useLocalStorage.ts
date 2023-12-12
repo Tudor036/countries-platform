@@ -10,10 +10,13 @@ const localStorageStore = {
 	},
 };
 
-export default function useLocalStorage<T>(key: string, initialValue?: T) {
-	const [value, setValue] = createSignal<T>();
+export default function createLocalStorage<T>(key: string, initialValue?: T) {
+	const [value, _setValue] = createSignal<T>();
 
-	createRenderEffect(() => {
+	const storeValue = (val: () => T) =>
+		localStorageStore.set(key, JSON.stringify({ [`${key}`]: val() }));
+
+	const initializeValue = () => {
 		if (typeof window === "undefined")
 			return new Error("Window is undefined");
 
@@ -23,18 +26,18 @@ export default function useLocalStorage<T>(key: string, initialValue?: T) {
 			T
 		>;
 		const storedValue = storedObjectValue?.[key];
+		const newValue = storedValue || initialValue;
+		_setValue(() => newValue);
+		localStorageStore.set(key, JSON.stringify({ [`${key}`]: newValue }));
+	};
 
-		if (value() === undefined) {
-			const newValue = storedValue || initialValue;
-			setValue(() => newValue);
-			localStorageStore.set(
-				key,
-				JSON.stringify({ [`${key}`]: newValue })
-			);
-		} else if (value() !== storedValue) {
-			localStorageStore.set(key, JSON.stringify({ [`${key}`]: value() }));
-		}
-	});
+	initializeValue();
 
-	return [value, setValue] as const;
+	return [
+		value,
+		(val: () => T) => {
+			storeValue(val);
+			_setValue(val);
+		},
+	] as const;
 }
