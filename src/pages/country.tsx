@@ -17,26 +17,26 @@ export default function Country() {
 			<section class="mb-8 sm:mb-12 md:mb-16 lg:mb-20">
 				<A
 					href={location.state?.origin ?? "/"}
-					class="text-sm md:text-md lg:text-lg xl:text-xl flex flex-row gap-4 items-center w-fit shadow-sm rounded-sm font-body dark:text-white py-3 px-10 bg-primaryLight dark:bg-primaryDark"
+					class="text-sm md:text-md lg:text-lg flex flex-row gap-4 items-center w-fit shadow-sm rounded-sm font-body dark:text-white py-3 px-10 bg-primaryLight dark:bg-primaryDark"
 				>
 					<ArrowLeft />
 					<span>Back</span>
 				</A>
 			</section>
-			<section class="dark:text-white flex flex-col md:flex-row justify-between w-full h-full gap-11 max-w-xs mx-auto mb-10">
+			<section class="dark:text-white flex flex-col lg:flex-row justify-between w-full h-full gap-11 max-w-xs md:max-w-md lg:max-w-full mx-auto mb-10">
 				<Show when={!country.loading} fallback={<h2>Loading...</h2>}>
 					<Show when={country.latest} fallback={<NotFound />}>
-						<div class="flex-1 h-[300px] md:pr-16 lg:pr-20">
+						<div class="flex-1 h-[300px] m-auto lg:m-0 lg:mr-auto">
 							<img
 								src={country.latest.flags.svg}
 								class="w-full h-full object-cover aspect-video"
 							/>
 						</div>
-						<div class="flex-1 md:pl-16 lg:pl-20 space-y-6 h-full">
+						<div class="flex-1 m-auto lg:m-0 lg:pl-20 space-y-6 w-full h-full">
 							<h2 class="font-heading text-3xl">
 								{country.latest.name}
 							</h2>
-							<div class="flex flex-col md:flex-row justify-between gap-8 md:gap-auto mt-auto mb-auto">
+							<div class="flex flex-col md:flex-row justify-between gap-8 md:gap-auto my-auto">
 								<div>
 									<p style={{ "line-height": "32px" }}>
 										<span class="font-body">
@@ -89,7 +89,12 @@ export default function Country() {
 									</p>
 								</div>
 							</div>
-							<Show when={country.latest.borders}>
+							<Show
+								when={
+									country.latest.borders &&
+									country.latest.borders.length > 0
+								}
+							>
 								<div class="flex flex-row items-center flex-wrap gap-3">
 									<p>
 										<span class="font-body text-xl">
