@@ -8,7 +8,7 @@ export default function Header() {
 	const [theme, toggleTheme] = createColorTheme();
 
 	return (
-		<header class="w-full px-4 md:px-10 lg:px-20 py-7 flex flex-row justify-between bg-primaryLight dark:bg-primaryDark shadow-sm">
+		<header class="w-full px-8 md:px-10 lg:px-20 py-7 flex flex-row justify-between bg-primaryLight dark:bg-primaryDark shadow-sm">
 			<h1 class="sm:text-[14px] md:text-[19px] lg:text-[24px] font-extrabold text-[#111517] dark:text-white">
 				Where in the World?
 			</h1>

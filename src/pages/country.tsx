@@ -14,16 +14,16 @@ export default function Country() {
 
 	return (
 		<>
-			<section class="mb-16 lg:mb-20">
+			<section class="mb-8 sm:mb-12 md:mb-16 lg:mb-20">
 				<A
 					href={location.state?.origin ?? "/"}
-					class="flex flex-row gap-4 items-center w-fit shadow-sm rounded-sm font-body dark:text-white py-3 px-10 bg-primaryLight dark:bg-primaryDark"
+					class="text-sm md:text-md lg:text-lg xl:text-xl flex flex-row gap-4 items-center w-fit shadow-sm rounded-sm font-body dark:text-white py-3 px-10 bg-primaryLight dark:bg-primaryDark"
 				>
 					<ArrowLeft />
 					<span>Back</span>
 				</A>
 			</section>
-			<section class="dark:text-white flex flex-col md:flex-row justify-between w-full h-full">
+			<section class="dark:text-white flex flex-col md:flex-row justify-between w-full h-full gap-11 max-w-xs mx-auto mb-10">
 				<Show when={!country.loading} fallback={<h2>Loading...</h2>}>
 					<Show when={country.latest} fallback={<NotFound />}>
 						<div class="flex-1 h-[300px] md:pr-16 lg:pr-20">
@@ -36,7 +36,7 @@ export default function Country() {
 							<h2 class="font-heading text-3xl">
 								{country.latest.name}
 							</h2>
-							<div class="flex flex-col md:flex-row justify-between mt-auto mb-auto">
+							<div class="flex flex-col md:flex-row justify-between gap-8 md:gap-auto mt-auto mb-auto">
 								<div>
 									<p style={{ "line-height": "32px" }}>
 										<span class="font-body">
@@ -90,24 +90,22 @@ export default function Country() {
 								</div>
 							</div>
 							<Show when={country.latest.borders}>
-								<div class="space-y-3">
+								<div class="flex flex-row items-center flex-wrap gap-3">
 									<p>
 										<span class="font-body text-xl">
 											Border Countries
 										</span>
 										:
 									</p>
-									<div class="flex flex-row flex-wrap gap-3">
-										<For each={country.latest.borders}>
-											{(countryName) => (
-												<span class="py-2 px-4 bg-primaryLight dark:bg-primaryDark">
-													<A href={`/${countryName}`}>
-														{countryName}
-													</A>
-												</span>
-											)}
-										</For>
-									</div>
+									<For each={country.latest.borders}>
+										{(countryName) => (
+											<span class="text-xs md:text-sm lg:text-md shadow-md py-2 px-4 bg-primaryLight dark:bg-primaryDark">
+												<A href={`/${countryName}`}>
+													{countryName}
+												</A>
+											</span>
+										)}
+									</For>
 								</div>
 							</Show>
 						</div>

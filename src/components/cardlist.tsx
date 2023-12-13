@@ -18,7 +18,7 @@ const CardItem: Component<CardItemProps> = (props) => {
 				state={{
 					origin: props.origin(),
 				}}
-				class="max-w-xs w-full m-auto shadow-md bg-primaryLight dark:bg-primaryDark rounded-sm overflow-hidden"
+				class="max-w-[270px] w-full m-auto shadow-md bg-primaryLight dark:bg-primaryDark rounded-sm overflow-hidden"
 			>
 				<div class="w-full h-[160px]">
 					<img
@@ -68,7 +68,7 @@ const Cardlist: Component = () => {
 			<Show when={countries.latest.length > 0} fallback={<NotFound />}>
 				<ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10 lg:gap-16">
 					<For each={countries.latest}>
-						{(country, idx) => (
+						{(country) => (
 							<CardItem origin={currentUrl} country={country} />
 						)}
 					</For>
